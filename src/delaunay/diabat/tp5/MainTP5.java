@@ -7,17 +7,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class MainTP5 extends Application {
+
 	@Override
 	public void start(Stage primaryStage) {
 		try
 		{
-	        primaryStage.setTitle("TP5 binome1-binome2");
+	        primaryStage.setTitle("TP5 Delaunay - Diabat");
 			FXMLLoader loader = new FXMLLoader() ;
-            loader.setLocation(MainTP5.class.getResource("VueTP5.fxml"));
+            loader.setLocation(MainTP5.class.getResource("view/VueTP5.fxml"));
             Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root);
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
