@@ -1,5 +1,6 @@
 package delaunay.diabat.tp5.view;
 
+import delaunay.diabat.tp5.model.ChargerGrille;
 import delaunay.diabat.tp5.model.MotsCroisesTP5;
 import delaunay.diabat.tp5.*;
 import javafx.fxml.FXML;
@@ -20,8 +21,46 @@ public class ControleurTP5 {
     @FXML
 	private void initialize() {
 
-    	mc = MotsCroisesFactory.creerMotsCroises2x3();
+    	// mc = MotsCroisesFactory.creerMotsCroises2x3();
+    		
+        ChargerGrille loader = new ChargerGrille();
+        
+        try {
+            this.mc = loader.extraireGrille(ChargerGrille.CHOIX_GRILLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+        initDB();
+	}
+  
+    private void initDB() {
+    	
+        TextField modele = (TextField) this.monGridPane.getChildren().get(0);
+        this.monGridPane.getChildren().clear();
 
+        for (int lig = 1; lig <= this.mc.getHauteur(); ++lig) {
+            for (int col = 1; col <= this.mc.getLargeur(); ++col) {
+                if (!this.mc.estCaseNoire(lig, col)) {
+                    TextField tf = new TextField();
+
+                    tf.setPrefWidth(modele.getPrefWidth());
+                    tf.setPrefHeight(modele.getPrefHeight());
+
+                    for (Object cle : modele.getProperties().keySet()) {
+                        tf.getProperties().put(cle, modele.getProperties().get(cle));
+                    }
+
+                    this.monGridPane.add(tf, col - 1, lig - 1);
+                }
+            }
+        }
+        
+        initTF();
+    }
+    
+    private void initTF() {
+    	
     	for (Node n : monGridPane.getChildren())
     	{
     	   if (n instanceof TextField)
@@ -50,13 +89,14 @@ public class ControleurTP5 {
                 	tf.setTooltip(new Tooltip(defVert));
                 }
                     
+                // Events
                 tf.setOnMouseClicked((e) -> {
                     this.clicCase(e);
                 });
     	   }
-    	}	
-	}
-  
+    	}	   	
+    }
+    
 	@FXML
 	public void clicCase(MouseEvent e) {
 		

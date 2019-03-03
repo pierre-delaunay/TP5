@@ -4,14 +4,14 @@ import java.sql.*;
 
 public class ChargerGrille {
 	
-    private Connection maConnection;
+    private Connection maConnexion;
     public static final int CHOIX_GRILLE = 10;
     private static final String TABLE_GRILLE = "TP5_GRILLE";
     private static final String TABLE_MOT = "TP5_MOT";
     
     public ChargerGrille() {
     	
-		try { maConnection = connectionMySQL() ; }
+		try { maConnexion = connectionMySQL() ; }
 		catch (SQLException e) { e.printStackTrace(); }
 		
     }
@@ -32,10 +32,12 @@ public class ChargerGrille {
     	MotsCroisesTP5 mc = null;
     	
         String sqlQuery = "SELECT * FROM " + TABLE_GRILLE + " WHERE num_grille = ?";
-        PreparedStatement stmt = connect.prepareStatement(sqlQuery);
-        stmt.setInt(1, grille);
-        ResultSet setGrilles = stmt.executeQuery();
+        PreparedStatement pstmt = connect.prepareStatement(sqlQuery);
+        pstmt.setInt(1, grille);
+        ResultSet setGrilles = pstmt.executeQuery();
 
+        pstmt.close(); pstmt = null;
+        
         if (setGrilles.first()) {
         	
         	int hauteur = setGrilles.getInt("hauteur");
@@ -43,10 +45,10 @@ public class ChargerGrille {
         	mc = new MotsCroisesTP5(hauteur, largeur);
         	
             sqlQuery = "SELECT * FROM " + TABLE_MOT + " WHERE num_grille = ?";
-            stmt = connect.prepareStatement(sqlQuery);
-            stmt.setInt(1, grille);
-            ResultSet setMots = stmt.executeQuery();
-            
+            pstmt = connect.prepareStatement(sqlQuery);
+            pstmt.setInt(1, grille);
+            ResultSet setMots = pstmt.executeQuery();
+                        
             while (setMots.next()) {
                 int col = setMots.getInt("colonne");
                 int lig = setMots.getInt("ligne");
@@ -68,13 +70,15 @@ public class ChargerGrille {
             }
         }
         
+        pstmt.close(); pstmt = null;
+        connect.close(); connect = null;
     	return mc;
     }
     
     
-    public MotsCroisesTP5 extraireGrille() throws SQLException {
+    public MotsCroisesTP5 extraireGrille(int numChoix) throws SQLException {
     	
-    	return extraireBD(maConnection, CHOIX_GRILLE);
+    	return extraireBD(maConnexion, CHOIX_GRILLE);
     	
     }
 }
