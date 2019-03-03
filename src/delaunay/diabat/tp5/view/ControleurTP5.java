@@ -21,8 +21,9 @@ public class ControleurTP5 {
     @FXML
 	private void initialize() {
 
-    	// mc = MotsCroisesFactory.creerMotsCroises2x3();
-    		
+    	mc = MotsCroisesFactory.creerMotsCroises2x3();
+    	
+    	/*
         ChargerGrille loader = new ChargerGrille();
         
         try {
@@ -32,6 +33,10 @@ public class ControleurTP5 {
         }
        
         initDB();
+        
+        */
+    	
+    	initTF();
 	}
   
     private void initDB() {
