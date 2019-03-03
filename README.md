@@ -10,16 +10,20 @@ DIABAT Alexis
 
 ## Prérequis
 
-Eclipse Neon JavaFX 64 Bits
-
 ```
-Ajouter le jar :  mysql-connector-java-5.1.47 (https://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.47)
+IDE : Eclipse Neon JavaFX 64 Bits
 ```
 
 ## Installation
 
-TBA
+Récupération du projet sous Eclipse
 
 ```
-TBA
+Importer le projet sur Eclipse :
+File > Import > Git > Projects from Git
+
+Ajouter le jar au Build Path du projet :  
+mysql-connector-java-5.1.47 (https://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.47)
+
+Modifier les informations de connection à la base dans la classe ChargerGrille
 ```
