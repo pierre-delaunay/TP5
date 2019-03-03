@@ -4,8 +4,7 @@ UE : Programmation d'applications
 
 ## Binôme
 
-DELAUNAY Pierre
-DIABAT Alexis
+DELAUNAY Pierre - DIABAT Alexis - L3 Miage Groupe 2C
 
 
 ## Prérequis
@@ -16,7 +15,7 @@ IDE : Eclipse Neon JavaFX 64 Bits
 
 ## Installation
 
-Récupération du projet sous Eclipse
+Récupération du projet sous Eclipse :
 
 ```
 Importer le projet sur Eclipse :
