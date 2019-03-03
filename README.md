@@ -2,18 +2,18 @@
 
 UE : Programmation d'applications
 
-## Binôme
+## BinÃ´me
 
 DELAUNAY Pierre
 DIABAT Alexis
 
 
-## Prérequis
+## PrÃ©requis
 
 Eclipse Neon JavaFX 64 Bits
 
 ```
-TBA
+Ajouter le jar :  mysql-connector-java-5.1.47 (https://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.47)
 ```
 
 ## Installation

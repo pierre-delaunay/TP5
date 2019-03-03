@@ -34,16 +34,22 @@ public class ControleurTP5 {
 		    	// Bindings
 		    	
 		    	tf.textProperty().bindBidirectional(mc.propositionProperty(lig, col));
-		    	/*
+		    	
 		    	// Tooltips
-                String horizDefinition = this.mc.getDefinition(lig, col, true);
-                String vertiDefinition = this.mc.getDefinition(lig, col, false);
-                if (!horizDefinition.equals("") && !vertiDefinition.equals("")) {
-                    horizDefinition += " / ";
-                }
-                tf.setTooltip(new Tooltip(horizDefinition + "" + vertiDefinition));
+
+                String defHoriz = this.mc.getDefinition(lig, col, true);
+                String defVert = this.mc.getDefinition(lig, col, false);
                 
-                */
+                if (defHoriz != null && defVert != null) {
+                    tf.setTooltip(new Tooltip(defHoriz + " / " + defVert));
+                }
+                else if (defHoriz != null) {
+                    tf.setTooltip(new Tooltip(defHoriz));
+                }
+                else if (defVert != null) {
+                	tf.setTooltip(new Tooltip(defVert));
+                }
+                    
                 tf.setOnMouseClicked((e) -> {
                     this.clicCase(e);
                 });
