@@ -12,8 +12,7 @@
                 <Menu mnemonicParsing="false" text="Menu">
                     <items>
                         <MenuItem fx:id="random" mnemonicParsing="false" onAction="#random" text="Grille aléatoire" />
-                        <Menu fx:id="liste" mnemonicParsing="false" text="Choix de la grille" />
-                        <MenuItem fx:id="about" mnemonicParsing="false" onAction="#modalAbout" text="À propos" />
+                        <Menu fx:id="liste" mnemonicParsing="false" text="Choisir une grille" />
                         <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exit" text="Quitter" />
                     </items>
                 </Menu>

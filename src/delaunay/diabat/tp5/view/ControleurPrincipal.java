@@ -48,25 +48,5 @@ public class ControleurPrincipal {
     private void exit() {
         System.exit(0);
     }
-
-    @FXML
-    private void modalAbout() {
-
-		try {
-	    	FXMLLoader fxmlLoader = new FXMLLoader(MainTP5.class.getResource("view/VueAbout.fxml"));
-	    	
-	    	Parent root1;
-			root1 = (Parent) fxmlLoader.load();
-	    	Stage stage = new Stage();
-            Image icone = new Image("file:images/istic.png");
-            stage.getIcons().add(icone);
-            stage.setTitle("À propos");
-	    	stage.setScene(new Scene(root1));  
-	    	stage.show();   	
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-    }
     
 }
