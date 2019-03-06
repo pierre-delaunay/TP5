@@ -24,5 +24,7 @@ File > Import > Git > Projects from Git
 Ajouter le jar au Build Path du projet :  
 mysql-connector-java-5.1.47 (https://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.47)
 
-Modifier les informations de connexion à la base dans la classe ChargerGrille
+Créer une base de données avec le script SQL fourni
+
+Modifier les informations de connexion à la base dans la classe ChargerGrille (variable url)
 ```
