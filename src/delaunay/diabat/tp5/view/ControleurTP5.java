@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 public class ControleurTP5 {
 
     private MotsCroisesTP5 mc;
+    private TextField courant = null;
 
     @FXML
     private GridPane monGridPane;
@@ -22,25 +23,25 @@ public class ControleurTP5 {
 	private void initialize() {
 
     	mc = MotsCroisesFactory.creerMotsCroises2x3();
-    	
-    	/*
+
+
         ChargerGrille loader = new ChargerGrille();
-        
+
         try {
             this.mc = loader.extraireGrille(ChargerGrille.CHOIX_GRILLE);
         } catch (Exception e) {
             e.printStackTrace();
         }
-       
+
         initDB();
-        
-        */
-    	
+
+
+
     	initTF();
 	}
-  
-    private void initDB() {
-    	
+
+    public void initDB() {
+
         TextField modele = (TextField) this.monGridPane.getChildren().get(0);
         this.monGridPane.getChildren().clear();
 
@@ -60,12 +61,12 @@ public class ControleurTP5 {
                 }
             }
         }
-        
+
         initTF();
     }
-    
-    private void initTF() {
-    	
+
+    public void initTF() {
+
     	for (Node n : monGridPane.getChildren())
     	{
     	   if (n instanceof TextField)
@@ -74,16 +75,16 @@ public class ControleurTP5 {
 		    	int lig = ((int) n.getProperties().get("gridpane-row")) + 1;
 		    	int col = ((int) n.getProperties().get("gridpane-column")) + 1;
 
-		    	
+
 		    	// Bindings
-		    	
+
 		    	tf.textProperty().bindBidirectional(mc.propositionProperty(lig, col));
-		    	
+
 		    	// Tooltips
 
                 String defHoriz = this.mc.getDefinition(lig, col, true);
                 String defVert = this.mc.getDefinition(lig, col, false);
-                
+
                 if (defHoriz != null && defVert != null) {
                     tf.setTooltip(new Tooltip(defHoriz + " / " + defVert));
                 }
@@ -93,27 +94,44 @@ public class ControleurTP5 {
                 else if (defVert != null) {
                 	tf.setTooltip(new Tooltip(defVert));
                 }
-                    
+
+
+                tf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue) {
+                        courant = tf;
+                        courant.getStyleClass().add("courant");
+                    }
+
+                    if (oldValue)
+                        tf.getStyleClass().remove("courant");
+                });
+
+
                 // Events
                 tf.setOnMouseClicked((e) -> {
                     this.clicCase(e);
                 });
     	   }
-    	}	   	
+    	}
     }
-    
+
 	@FXML
 	public void clicCase(MouseEvent e) {
-		
+
     	if (e.getButton() == MouseButton.MIDDLE)
     	{
 	    	// C'est un clic "central"
 	    	TextField cs = (TextField) e.getSource();
-	    	int lig = GridPane.getRowIndex(cs);
-            int col = GridPane.getColumnIndex(cs);
+	    	int lig = GridPane.getRowIndex(cs) + 1;
+            int col = GridPane.getColumnIndex(cs) + 1;
             this.mc.reveler(lig, col);
-            
+
     	}
 	}
-	
+
+	public void setMotsCroises(MotsCroisesTP5 mc) {
+		// TODO Auto-generated method stub
+		this.mc = mc;
+	}
+
 }

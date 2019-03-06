@@ -14,39 +14,54 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class ControleurPrincipal {
-	
+
 	private ChargerGrille loader;
 	private ControleurTP5 ctrl;
-	
+
     public void setControleur(ControleurTP5 ctrl) {
         this.ctrl = ctrl;
     }
-    
+
     @FXML
-    private Menu liste;	
-    
+    private Menu liste;
+
     @FXML
     public MenuItem exit;
 
     @FXML
     private MenuItem random;
 
-    @FXML
-    private MenuItem about;
-    
+
     @FXML
     public void initialize() {
-
+    	this.loader = new ChargerGrille();
     }
 
     @FXML
     private void random() {
-    
+
+    	// Entier aléa entre 1 et 11
+		int r = (int) (Math.random() * 11) + 1;
+
+		this.nouvelleGrille(r);
+
     }
-    
+
     @FXML
+    private void nouvelleGrille(int numGrille) {
+
+        try {
+            ctrl.setMotsCroises(this.loader.extraireGrille(numGrille));
+            ctrl.initDB();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+	}
+
+	@FXML
     private void exit() {
         System.exit(0);
     }
-    
+
 }

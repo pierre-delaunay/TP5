@@ -1,0 +1,5 @@
+.text-input.courant {
+    -fx-border-color: #00a0fc;
+    -fx-padding: 1 4 1 4;
+    -fx-border-width: 3px;
+}

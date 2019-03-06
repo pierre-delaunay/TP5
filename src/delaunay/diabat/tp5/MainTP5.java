@@ -14,11 +14,13 @@ public class MainTP5 extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try
-		{			
+		{
             primaryStage.setTitle("TP5 Delaunay - Diabat");
+            // Ajout de l'icône ISTIC
             Image icone = new Image("file:images/istic.png");
             primaryStage.getIcons().add(icone);
-            
+            primaryStage.setResizable(false);
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainTP5.class.getResource("view/VuePrincipale.fxml"));
             BorderPane root = loader.load();
@@ -32,8 +34,8 @@ public class MainTP5 extends Application {
 
             root.setCenter(grille);
 
-            Scene scene = new Scene(root, 550, 650);
-            
+            Scene scene = new Scene(root, 600, 340);
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
