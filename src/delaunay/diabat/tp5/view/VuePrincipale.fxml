@@ -5,13 +5,13 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" stylesheets="@Style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="delaunay.diabat.tp5.view.ControleurPrincipal">
+<BorderPane id="monBorderPane" prefHeight="500.0" prefWidth="400.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="delaunay.diabat.tp5.view.ControleurPrincipal">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Menu">
                     <items>
-                        <MenuItem fx:id="random" mnemonicParsing="false" onAction="#random" text="Grille aléatoire" />
+                        <MenuItem fx:id="random" mnemonicParsing="false" onAction="#random" text="Nouvelle grille aléatoire" />
                         <Menu fx:id="liste" mnemonicParsing="false" text="Choisir une grille" />
                         <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exit" text="Quitter" />
                     </items>

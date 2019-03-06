@@ -15,8 +15,8 @@ public class MainTP5 extends Application {
 	public void start(Stage primaryStage) {
 		try
 		{
-            primaryStage.setTitle("TP5 Delaunay - Diabat");
-            // Ajout de l'icône ISTIC
+            primaryStage.setTitle("Mots CroisÃ©s");
+            // Ajout de l'icone ISTIC
             Image icone = new Image("file:images/istic.png");
             primaryStage.getIcons().add(icone);
             primaryStage.setResizable(false);
@@ -34,7 +34,7 @@ public class MainTP5 extends Application {
 
             root.setCenter(grille);
 
-            Scene scene = new Scene(root, 600, 340);
+            Scene scene = new Scene(root, 850, 650);
 
 			primaryStage.setScene(scene);
 			primaryStage.show();

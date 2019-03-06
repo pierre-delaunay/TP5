@@ -1,5 +1,12 @@
+#monBorderPane {
+	-fx-background-color: black;
+}
+
 .text-input.courant {
-    -fx-border-color: #00a0fc;
-    -fx-padding: 1 4 1 4;
-    -fx-border-width: 3px;
+    -fx-border-color: blue;
+    -fx-border-width: 5px;
+}
+
+.correct {
+	-fx-border-color: green;
 }

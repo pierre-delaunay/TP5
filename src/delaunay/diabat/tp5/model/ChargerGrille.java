@@ -1,6 +1,8 @@
 package delaunay.diabat.tp5.model;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChargerGrille {
 
@@ -17,7 +19,7 @@ public class ChargerGrille {
     }
 
     public static Connection connectionMySQL() throws SQLException {
-        //String url = "jdbc:mysql://anteros.istic.univ­rennes1.fr/base_pdelaunay";
+        //String url = "jdbc:mysql://anteros.istic.univï¿½rennes1.fr/base_pdelaunay";
         String url = "jdbc:mysql://localhost/base_delaunay";
         // "user_18012555", "0900332hs"
 
@@ -69,12 +71,32 @@ public class ChargerGrille {
             }
         }
 
-        pstmt.close(); pstmt = null;
-        connect.close(); connect = null;
+        //pstmt.close(); pstmt = null;
+        //connect.close(); connect = null;
     	return mc;
     }
 
 
+    public Map<Integer, String> listeGrilles() {
+    	
+    	Map<Integer, String> map = new HashMap<>();	
+    	String sqlQuery = "SELECT * FROM " + ChargerGrille.TABLE_GRILLE;
+    	
+        try {
+            Statement stmt = maConnexion.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+            
+            while (rs.next()) {
+                map.put(rs.getInt("num_grille"), rs.getString("nom_grille"));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return map;
+    }
+    
     public MotsCroisesTP5 extraireGrille(int numChoix) throws SQLException {
 
     	return extraireBD(maConnexion, numChoix);

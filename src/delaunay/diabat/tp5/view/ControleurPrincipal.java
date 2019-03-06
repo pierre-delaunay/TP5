@@ -1,6 +1,7 @@
 package delaunay.diabat.tp5.view;
 
 import java.io.IOException;
+import java.util.Map;
 
 import delaunay.diabat.tp5.MainTP5;
 import delaunay.diabat.tp5.model.*;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class ControleurPrincipal {
@@ -23,6 +25,9 @@ public class ControleurPrincipal {
     }
 
     @FXML
+    private BorderPane monBorderPane;
+    
+    @FXML
     private Menu liste;
 
     @FXML
@@ -34,13 +39,24 @@ public class ControleurPrincipal {
 
     @FXML
     public void initialize() {
+    	
     	this.loader = new ChargerGrille();
+    	
+    	Map<Integer, String> map = this.loader.listeGrilles();
+    	
+        for (Integer cle : map.keySet()) {
+            String nomGrille = map.get(cle);
+            MenuItem item = new MenuItem(nomGrille);
+
+            item.setOnAction( (e) -> { this.nouvelleGrille(cle); } );
+            this.liste.getItems().add(item);
+        }
     }
 
     @FXML
     private void random() {
 
-    	// Entier aléa entre 1 et 11
+    	// Entier alï¿½a entre 1 et 11
 		int r = (int) (Math.random() * 11) + 1;
 
 		this.nouvelleGrille(r);

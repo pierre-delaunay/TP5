@@ -2,14 +2,22 @@ package delaunay.diabat.tp5.view;
 
 import delaunay.diabat.tp5.model.ChargerGrille;
 import delaunay.diabat.tp5.model.MotsCroisesTP5;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import delaunay.diabat.tp5.*;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 public class ControleurTP5 {
 
@@ -95,25 +103,44 @@ public class ControleurTP5 {
                 	tf.setTooltip(new Tooltip(defVert));
                 }
 
-
-                tf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+               
+                tf.focusedProperty().addListener((obsValue, oldValue, newValue) -> {
                     if (newValue) {
                         courant = tf;
                         courant.getStyleClass().add("courant");
                     }
 
-                    if (oldValue)
-                        tf.getStyleClass().remove("courant");
+                    if (oldValue) { tf.getStyleClass().remove("courant"); }                  
+                        
                 });
 
 
-                // Events
+                // Event : revele la case avec un clic molette
                 tf.setOnMouseClicked((e) -> {
                     this.clicCase(e);
+                });
+                
+                tf.setOnKeyPressed((e) -> {
+                    this.frappeClavier(e);
                 });
     	   }
     	}
     }
+
+	private void frappeClavier(KeyEvent e) {
+		// TODO Auto-generated method stub
+        KeyCode code = e.getCode();
+        TextField tf = (TextField) e.getSource();	
+        
+        switch (code) {
+        
+        }
+	}
+
+	private void transition() {
+		// TODO Auto-generated method stub
+		 ScaleTransition transition = new ScaleTransition();
+	}
 
 	@FXML
 	public void clicCase(MouseEvent e) {
