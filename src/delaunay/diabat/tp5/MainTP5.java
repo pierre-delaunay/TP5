@@ -1,14 +1,19 @@
 package delaunay.diabat.tp5;
 
+import java.awt.Button;
+import java.awt.Insets;
+
 import delaunay.diabat.tp5.view.ControleurPrincipal;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 public class MainTP5 extends Application {
 
@@ -26,7 +31,7 @@ public class MainTP5 extends Application {
             loader.setLocation(MainTP5.class.getResource("view/VuePrincipale.fxml"));
             BorderPane root = loader.load();
             ControleurPrincipal rootController = loader.getController();
-
+        		
             FXMLLoader l = new FXMLLoader();
             l.setLocation(MainTP5.class.getResource("view/VueTP5.fxml"));
             BorderPane grille = l.load();
@@ -56,4 +61,5 @@ public class MainTP5 extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }

@@ -34,7 +34,7 @@ public class ControleurPrincipal {
     public MenuItem exit;
 
     @FXML
-    private MenuItem random;
+    private MenuItem aleatoire;
 
 
     @FXML
@@ -54,7 +54,7 @@ public class ControleurPrincipal {
     }
 
     @FXML
-    private void random() {
+    private void grilleAleatoire() {
 
     	// Entier al�a entre 1 et 11
 		int r = (int) (Math.random() * 11) + 1;
