@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 
 public class MainTP5 extends Application {
@@ -15,7 +16,7 @@ public class MainTP5 extends Application {
 	public void start(Stage primaryStage) {
 		try
 		{
-            primaryStage.setTitle("Mots Croisés");
+            primaryStage.setTitle("TP 5 - Delaunay/Diabat");
             // Ajout de l'icone ISTIC
             Image icone = new Image("file:images/istic.png");
             primaryStage.getIcons().add(icone);
@@ -36,8 +37,16 @@ public class MainTP5 extends Application {
 
             Scene scene = new Scene(root, 850, 650);
 
+            // CTRL + W
+            scene.setOnKeyPressed(e -> {
+                if (e.isControlDown() && e.getCode() == KeyCode.W) {
+                    System.exit(0);
+                }
+            });
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
+
 
 		} catch(Exception e) {
 			e.printStackTrace();

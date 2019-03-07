@@ -43,8 +43,6 @@ public class ControleurTP5 {
 
         initDB();
 
-
-
     	initTF();
 	}
 
@@ -103,26 +101,49 @@ public class ControleurTP5 {
                 	tf.setTooltip(new Tooltip(defVert));
                 }
 
-               
+
                 tf.focusedProperty().addListener((obsValue, oldValue, newValue) -> {
                     if (newValue) {
                         courant = tf;
                         courant.getStyleClass().add("courant");
                     }
 
-                    if (oldValue) { tf.getStyleClass().remove("courant"); }                  
-                        
+                    if (oldValue) { tf.getStyleClass().remove("courant"); }
+
+
                 });
 
+                // Listener
+                tf.textProperty().addListener((obsValue, oldValue, newValue) -> {
 
-                // Event : revele la case avec un clic molette
+                    if (newValue.matches("[A-Z]")) {
+                    	System.out.println("match");
+                    }
+
+                });
+
+                // Listener : verification de la longueur
+                tf.lengthProperty().addListener((obsValue, oldValue, newValue) -> {
+
+                	if (tf.getText().length() >= 1 && newValue.intValue() > oldValue.intValue() ) {
+                		// trim() supprime les espaces initiaux
+                		tf.setText(tf.getText().trim().substring(0, 1));
+                	}
+
+                });
+
+                // Events : revele la case avec un clic molette
                 tf.setOnMouseClicked((e) -> {
                     this.clicCase(e);
+
                 });
-                
+
+                // Events : frappe clavier sur la case courante
                 tf.setOnKeyPressed((e) -> {
                     this.frappeClavier(e);
+                    //transition();
                 });
+
     	   }
     	}
     }
@@ -130,16 +151,46 @@ public class ControleurTP5 {
 	private void frappeClavier(KeyEvent e) {
 		// TODO Auto-generated method stub
         KeyCode code = e.getCode();
-        TextField tf = (TextField) e.getSource();	
-        
+        TextField tf = (TextField) e.getSource();
+
         switch (code) {
-        
+        	case UP :
+        		System.out.println("test");
+        	break;
+
+        	case DOWN :
+        	break;
+
+        	case LEFT :
+        	break;
+
+        	case RIGHT :
+        	break;
+
+        	case ENTER:
+
+        	break;
         }
 	}
 
+	private void deplacerCase(TextField courant, boolean direction) {
+
+	}
+
+
 	private void transition() {
 		// TODO Auto-generated method stub
-		 ScaleTransition transition = new ScaleTransition();
+		 ScaleTransition transition = new ScaleTransition(Duration.seconds(1), courant);
+
+		 transition.setFromX(0.2);
+		 transition.setFromY(0.2);
+
+		 transition.setToY(1);
+		 transition.setToX(1);
+
+		 transition.setAutoReverse(true);
+		 transition.play();
+
 	}
 
 	@FXML
