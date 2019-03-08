@@ -1,6 +1,7 @@
 package delaunay.diabat.tp5.view;
 
 import delaunay.diabat.tp5.model.ChargerGrille;
+import delaunay.diabat.tp5.model.GrilleGen;
 import delaunay.diabat.tp5.model.MotsCroisesTP5;
 
 import java.util.regex.Matcher;
@@ -22,6 +23,7 @@ import javafx.util.Duration;
 public class ControleurTP5 {
 
     private MotsCroisesTP5 mc;
+    private GrilleGen<TextField> grilleAux;
     private TextField courant = null;
 
     @FXML
@@ -71,7 +73,10 @@ public class ControleurTP5 {
     }
 
     public void initTF() {
-
+    	
+    	// Grille auxiliaire
+    	this.grilleAux = new GrilleGen<>(this.mc.getHauteur(), this.mc.getLargeur());
+    	
     	for (Node n : monGridPane.getChildren())
     	{
     	   if (n instanceof TextField)
@@ -142,6 +147,8 @@ public class ControleurTP5 {
                     this.frappeClavier(e);
                     //transition();
                 });
+                
+                this.grilleAux.setValue(lig, col, tf);
 
     	   }
     	}
