@@ -36,7 +36,36 @@ public class GrilleGen <T> {
     }
     
 	public boolean coordCorrectes(int lig, int col) {
-		return (lig <= this.lig && col <= this.col && lig > 0 && col > 0);
+		return (lig <= this.getLig() && col <= this.getCol() && lig >= 1 && col >= 1);
+	}
+	
+	public T getNextValue(int lig, int col, boolean horizontal, boolean reverse) {
+		assert coordCorrectes(lig, col) : "Coordonnees incorrectes";
+		
+		T v = this.getValue(lig, col);
+		
+		if (horizontal) {
+			while (col <= this.getCol() && v == null) {
+				if (reverse) {
+					--col;
+				} else {
+					++col;
+				}
+				v = this.getValue(lig, col);
+			}
+			
+		} else {
+            while (lig <= this.getLig() && v == null) {
+                if (reverse) {
+                	--lig;
+                } else {
+                	++lig;
+                }
+                v = this.getValue(lig, col);
+            }			
+		}
+		
+		return v;
 	}
 	
 	public IterateurMots iterateurMots (boolean horizontal, int num) {

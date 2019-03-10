@@ -22,10 +22,13 @@ import javafx.util.Duration;
 
 public class ControleurTP5 {
 
+	public enum Direction {HORIZONTAL, VERTICAL}
+	
     private MotsCroisesTP5 mc;
+    private TextField tfCourant = null;
     private GrilleGen<TextField> grilleAux;
-    private TextField courant = null;
-
+    private Direction directionCourante = Direction.HORIZONTAL;
+    
     @FXML
     private GridPane monGridPane;
 
@@ -35,7 +38,9 @@ public class ControleurTP5 {
     	//mc = MotsCroisesFactory.creerMotsCroises2x3();
 
         ChargerGrille loader = new ChargerGrille();
-
+        //this.tfCourant = null;
+        //this.directionCourante = Direction.HORIZONTAL;
+        
         try {
             this.mc = loader.extraireGrille(ChargerGrille.CHOIX_GRILLE);
         } catch (Exception e) {
@@ -44,7 +49,6 @@ public class ControleurTP5 {
 
         initDB();
 
-    	initTF();
 	}
 
     public void initDB() {
@@ -108,8 +112,8 @@ public class ControleurTP5 {
 
                 tf.focusedProperty().addListener((obsValue, oldValue, newValue) -> {
                     if (newValue) {
-                        courant = tf;
-                        courant.getStyleClass().add("courant");
+                        tfCourant = tf;
+                        tfCourant.getStyleClass().add("courant");
                     }
 
                     if (oldValue) { tf.getStyleClass().remove("courant"); }
@@ -122,6 +126,10 @@ public class ControleurTP5 {
 
                     if (newValue.matches("[A-Z]")) {
                     	System.out.println("match");
+                    	//agrandirCase();
+                    	//this.deplacerCase(tf, true);
+                    } else {
+                    	this.tfCourant.setText("");
                     }
 
                 });
@@ -145,7 +153,6 @@ public class ControleurTP5 {
                 // Events : frappe clavier sur la case courante
                 tf.setOnKeyPressed((e) -> {
                     this.frappeClavier(e);
-                    //transition();
                 });
                 
                 this.grilleAux.setValue(lig, col, tf);
@@ -160,33 +167,54 @@ public class ControleurTP5 {
         TextField tf = (TextField) e.getSource();
 
         switch (code) {
+        	case BACK_SPACE :
+                tfCourant.setText("");
+                this.deplacerCase(tfCourant, true);
+                break;
         	case UP :
-        		System.out.println("test");
+                this.directionCourante = Direction.VERTICAL;
+                this.deplacerCase(tf, true);
         	break;
 
         	case DOWN :
+                this.directionCourante = Direction.VERTICAL;
+                this.deplacerCase(tf, false);
         	break;
 
         	case LEFT :
+                this.directionCourante = Direction.HORIZONTAL;
+                this.deplacerCase(tf, true);
         	break;
 
         	case RIGHT :
+                this.directionCourante = Direction.HORIZONTAL;
+                this.deplacerCase(tf, false);
         	break;
 
-        	case ENTER:
+        	case ENTER :
 
         	break;
         }
 	}
 
-	private void deplacerCase(TextField courant, boolean direction) {
-
+	private void deplacerCase(TextField tfCourant, boolean reverse) {
+		
+    	int lig = ((int) tfCourant.getProperties().get("gridpane-row")) + 1;
+    	int col = ((int) tfCourant.getProperties().get("gridpane-column")) + 1;
+    	
+    	if (this.directionCourante == Direction.HORIZONTAL) {
+    		tfCourant = this.grilleAux.getNextValue(lig, reverse? --col : ++col, true, reverse);
+    	} else if (this.directionCourante == Direction.VERTICAL) {
+    		tfCourant = this.grilleAux.getNextValue(reverse? --lig : ++lig, col, false, reverse);
+    	}
+    	
+    	tfCourant.requestFocus();
 	}
 
 
-	private void transition() {
+	private void agrandirCase() {
 		// TODO Auto-generated method stub
-		 ScaleTransition transition = new ScaleTransition(Duration.seconds(1), courant);
+		 ScaleTransition transition = new ScaleTransition(Duration.seconds(1), tfCourant);
 
 		 transition.setFromX(0.2);
 		 transition.setFromY(0.2);
