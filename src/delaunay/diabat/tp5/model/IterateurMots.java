@@ -10,7 +10,7 @@ import java.util.Iterator;
  *
  */
 
-public class IterateurMots implements Iterator<String> {
+public class IterateurMots implements Iterator<Object> {
 
 	private Object[] tab;
 	private int curseur;
@@ -38,20 +38,14 @@ public class IterateurMots implements Iterator<String> {
 	}
 
 	@Override
-	public String next() {
+	public Object next() {
 		assert this.hasNext() : "L'itérateur n'est pas sur un objet";
 		
-		String concat = "";
-		
-		this.setCurseur();
-		
-		 while(this.curseur < tab.length && (this.tab[this.curseur] != null)) {
-			 concat += tab[this.curseur].toString();
-			 this.curseur++;
-		 }
-		 
-		this.curseur++;
-		return concat;
+	    Object next = (Object) this.tab[this.curseur];
+	    ++this.curseur;
+	    this.setCurseur();
+
+	    return next;
 	}
 
 }

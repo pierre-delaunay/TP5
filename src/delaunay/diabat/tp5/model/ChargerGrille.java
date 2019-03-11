@@ -60,12 +60,12 @@ public class ChargerGrille {
 
                 if (horizontal) {
                     for(int i = 0; i < solution.length(); ++i){
-                        mc.setSolution(lig, col + i, solution.charAt(i));
+                        mc.setSolution(lig, col + i, solution.toUpperCase().charAt(i));
                     }
                 }
                 else {
                     for(int i = 0; i < solution.length(); ++i){
-                        mc.setSolution(lig + i, col, solution.charAt(i));
+                        mc.setSolution(lig + i, col, solution.toUpperCase().charAt(i));
                     }
                 }
             }

@@ -42,7 +42,7 @@ public class MainTP5 extends Application {
 
             Scene scene = new Scene(root, 850, 650);
 
-            // CTRL + W
+            // CTRL + W : ferme la fenetre courante
             scene.setOnKeyPressed(e -> {
                 if (e.isControlDown() && e.getCode() == KeyCode.W) {
                     System.exit(0);
@@ -51,8 +51,7 @@ public class MainTP5 extends Application {
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
-
-
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

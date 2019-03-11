@@ -2,6 +2,7 @@ package delaunay.diabat.tp5.view;
 
 import delaunay.diabat.tp5.model.ChargerGrille;
 import delaunay.diabat.tp5.model.GrilleGen;
+import delaunay.diabat.tp5.model.IterateurMots;
 import delaunay.diabat.tp5.model.MotsCroisesTP5;
 
 import java.util.regex.Matcher;
@@ -35,12 +36,8 @@ public class ControleurTP5 {
     @FXML
 	private void initialize() {
 
-    	//mc = MotsCroisesFactory.creerMotsCroises2x3();
-
         ChargerGrille loader = new ChargerGrille();
-        //this.tfCourant = null;
-        //this.directionCourante = Direction.HORIZONTAL;
-        
+       
         try {
             this.mc = loader.extraireGrille(ChargerGrille.CHOIX_GRILLE);
         } catch (Exception e) {
@@ -48,7 +45,6 @@ public class ControleurTP5 {
         }
 
         initDB();
-
 	}
 
     public void initDB() {
@@ -89,7 +85,6 @@ public class ControleurTP5 {
 		    	int lig = ((int) n.getProperties().get("gridpane-row")) + 1;
 		    	int col = ((int) n.getProperties().get("gridpane-column")) + 1;
 
-
 		    	// Bindings
 
 		    	tf.textProperty().bindBidirectional(mc.propositionProperty(lig, col));
@@ -109,7 +104,7 @@ public class ControleurTP5 {
                 	tf.setTooltip(new Tooltip(defVert));
                 }
 
-
+                // Listener : la case selectionnee devient la case courante
                 tf.focusedProperty().addListener((obsValue, oldValue, newValue) -> {
                     if (newValue) {
                         tfCourant = tf;
@@ -117,21 +112,21 @@ public class ControleurTP5 {
                     }
 
                     if (oldValue) { tf.getStyleClass().remove("courant"); }
-
-
                 });
 
-                // Listener
+                // Listener : verification de la valeur dans la case avec une regex
                 tf.textProperty().addListener((obsValue, oldValue, newValue) -> {
-
-                    if (newValue.matches("[A-Z]")) {
+                	
+                	String regex = "[A-Z]";
+                	Pattern p = Pattern.compile(regex);
+                	
+                    if (newValue.matches(regex)) {
                     	System.out.println("match");
-                    	//agrandirCase();
-                    	//this.deplacerCase(tf, true);
+                    	agrandirCase();
+                    	this.deplacerCase(tf, false);
                     } else {
                     	this.tfCourant.setText("");
                     }
-
                 });
 
                 // Listener : verification de la longueur
@@ -147,7 +142,6 @@ public class ControleurTP5 {
                 // Events : revele la case avec un clic molette
                 tf.setOnMouseClicked((e) -> {
                     this.clicCase(e);
-
                 });
 
                 // Events : frappe clavier sur la case courante
@@ -171,44 +165,54 @@ public class ControleurTP5 {
                 tfCourant.setText("");
                 this.deplacerCase(tfCourant, true);
                 break;
+                
         	case UP :
                 this.directionCourante = Direction.VERTICAL;
                 this.deplacerCase(tf, true);
-        	break;
+                break;
 
         	case DOWN :
                 this.directionCourante = Direction.VERTICAL;
                 this.deplacerCase(tf, false);
-        	break;
+                break;
 
         	case LEFT :
                 this.directionCourante = Direction.HORIZONTAL;
                 this.deplacerCase(tf, true);
-        	break;
+                break;
 
         	case RIGHT :
                 this.directionCourante = Direction.HORIZONTAL;
                 this.deplacerCase(tf, false);
-        	break;
+                break;
 
         	case ENTER :
-
-        	break;
+        		revelerSolution(tf);
+        		break;
+        		
+        	default:
+        		break;
         }
 	}
 
-	private void deplacerCase(TextField tfCourant, boolean reverse) {
+	private void revelerSolution(TextField tf) {
 		
-    	int lig = ((int) tfCourant.getProperties().get("gridpane-row")) + 1;
-    	int col = ((int) tfCourant.getProperties().get("gridpane-column")) + 1;
+		boolean horizontal = (this.directionCourante == Direction.HORIZONTAL);
+		
+	}
+
+	private void deplacerCase(TextField tfSource, boolean reverse) {
+		
+    	int lig = ((int) tfSource.getProperties().get("gridpane-row")) + 1;
+    	int col = ((int) tfSource.getProperties().get("gridpane-column")) + 1;
     	
     	if (this.directionCourante == Direction.HORIZONTAL) {
-    		tfCourant = this.grilleAux.getNextValue(lig, reverse? --col : ++col, true, reverse);
+    		tfSource = this.grilleAux.getNextValue(lig, reverse? --col : ++col, true, reverse);
     	} else if (this.directionCourante == Direction.VERTICAL) {
-    		tfCourant = this.grilleAux.getNextValue(reverse? --lig : ++lig, col, false, reverse);
+    		tfSource = this.grilleAux.getNextValue(reverse? --lig : ++lig, col, false, reverse);
     	}
     	
-    	tfCourant.requestFocus();
+    	tfSource.requestFocus();
 	}
 
 
@@ -233,9 +237,12 @@ public class ControleurTP5 {
     	if (e.getButton() == MouseButton.MIDDLE)
     	{
 	    	// C'est un clic "central"
-	    	TextField cs = (TextField) e.getSource();
-	    	int lig = GridPane.getRowIndex(cs) + 1;
-            int col = GridPane.getColumnIndex(cs) + 1;
+	    	TextField tf = (TextField) e.getSource();
+            int lig = ((int) tf.getProperties().get("gridpane-row")) + 1;
+            int col = ((int) tf.getProperties().get("gridpane-column")) + 1;
+            
+            tf.getStyleClass().remove("erreur");
+            tf.getStyleClass().remove("correct");
             this.mc.reveler(lig, col);
 
     	}

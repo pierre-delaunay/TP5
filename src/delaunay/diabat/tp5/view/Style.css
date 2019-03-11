@@ -2,11 +2,15 @@
 	-fx-background-color: black;
 }
 
-.text-input.courant {
+.courant {
     -fx-border-color: blue;
     -fx-border-width: 5px;
 }
 
 .correct {
-	-fx-border-color: green;
+	-fx-background-color: green;
+}
+
+.erreur {
+    -fx-background-color: red;
 }

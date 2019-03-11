@@ -6,7 +6,6 @@ public class GrilleGen <T> {
 	private int col; 
 	private T tab[][] ; 
 	
-	
 	public GrilleGen(int lig, int col) {
 		 this.lig= lig; 
 		 this.col = col; 
@@ -71,14 +70,18 @@ public class GrilleGen <T> {
 	public IterateurMots iterateurMots (boolean horizontal, int num) {
 		
 		 if(horizontal) { 
-			 IterateurMots itCol = new IterateurMots(tab[num]);
-			 return itCol;
+			 return new IterateurMots(this.tab[num-1]);
 		 }
 		 else 
 		 { 	 
-			 IterateurMots itLig = new IterateurMots(tab);
-			 return itLig;
-		 }	
+			 Object[] tab = (T[]) new Object[this.getLig()];
+			 
+	         for (int i = 0; i < this.getLig(); ++i) {
+	        	 tab[i] = this.getValue(i + 1, num);
+	         }
+	       
+			 return new IterateurMots(tab);
+		 }
 	}
 	
 }
