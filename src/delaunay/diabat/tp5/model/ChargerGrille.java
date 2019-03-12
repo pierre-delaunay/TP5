@@ -10,6 +10,8 @@ public class ChargerGrille {
     public static final int CHOIX_GRILLE = 10;
     private static final String TABLE_GRILLE = "TP5_GRILLE";
     private static final String TABLE_MOT = "TP5_MOT";
+    public static final int MIN_NUM_GRILLE = 1;
+    public static final int MAX_NUM_GRILLE = 11;
 
     public ChargerGrille() {
 
@@ -17,7 +19,11 @@ public class ChargerGrille {
 		catch (SQLException e) { e.printStackTrace(); }
 
     }
-
+    
+    public int getNumGrilleAlea() {
+    	return (int) (Math.random() * MAX_NUM_GRILLE) + MIN_NUM_GRILLE;
+    }
+    
     public static Connection connectionMySQL() throws SQLException {
         //String url = "jdbc:mysql://anteros.istic.univ�rennes1.fr/base_pdelaunay";
         String url = "jdbc:mysql://localhost/base_delaunay";

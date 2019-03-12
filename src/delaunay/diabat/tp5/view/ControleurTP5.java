@@ -39,7 +39,7 @@ public class ControleurTP5 {
         ChargerGrille loader = new ChargerGrille();
        
         try {
-            this.mc = loader.extraireGrille(ChargerGrille.CHOIX_GRILLE);
+            this.mc = loader.extraireGrille(loader.getNumGrilleAlea());
         } catch (Exception e) {
             e.printStackTrace();
         }

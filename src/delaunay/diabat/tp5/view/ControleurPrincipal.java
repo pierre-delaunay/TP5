@@ -36,7 +36,6 @@ public class ControleurPrincipal {
     @FXML
     private MenuItem aleatoire;
 
-
     @FXML
     public void initialize() {
     	
@@ -56,11 +55,7 @@ public class ControleurPrincipal {
     @FXML
     private void grilleAleatoire() {
 
-    	// Entier al�a entre 1 et 11
-		int r = (int) (Math.random() * 11) + 1;
-
-		this.nouvelleGrille(r);
-
+		this.nouvelleGrille(this.loader.getNumGrilleAlea());
     }
 
     @FXML
