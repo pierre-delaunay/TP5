@@ -14,21 +14,31 @@ public class ChargerGrille {
     public static final int MAX_NUM_GRILLE = 11;
 
     public ChargerGrille() {
-
 		try { maConnexion = connectionMySQL() ; }
 		catch (SQLException e) { e.printStackTrace(); }
-
     }
     
+    /**
+     * Génération d'un numéro de grille aléatoire
+     * @return int aléatoire (entre 1 et 11 ici)
+     * Peut poser problème en cas de suppression de grilles
+     */
     public int getNumGrilleAlea() {
     	return (int) (Math.random() * MAX_NUM_GRILLE) + MIN_NUM_GRILLE;
     }
     
+    /**
+     * Paramètres de connexion à la base
+     * @return Connection
+     * @throws SQLException
+     */
     public static Connection connectionMySQL() throws SQLException {
-        //String url = "jdbc:mysql://anteros.istic.univ�rennes1.fr/base_pdelaunay";
+    	// Setup Fac
+        // String url = "jdbc:mysql://anteros.istic.univ-rennes1.fr/base_bousse";
+    	
+    	// Setup local
         String url = "jdbc:mysql://localhost/base_delaunay";
-        // "user_18012555", "0900332hs"
-
+  
         try {
         	Class.forName ("com.mysql.jdbc.Driver");
         }
@@ -36,6 +46,13 @@ public class ChargerGrille {
         return DriverManager.getConnection(url, "root", "");
     }
 
+    /**
+     * Extraction de la grille depuis la base
+     * @param Connection connect
+     * @param int grille, numéro de la grille souhaitée
+     * @return MotsCroisesTP5
+     * @throws SQLException
+     */
     public static MotsCroisesTP5 extraireBD(Connection connect, int grille) throws SQLException
     {
     	MotsCroisesTP5 mc = null;
@@ -83,6 +100,10 @@ public class ChargerGrille {
     }
 
 
+    /**
+     * Récupération des grilles de la base pour les ajouter dans le menu
+     * @return Map<Integer, String>, clé : clé primaire de la grille, valeur : nom de la grille
+     */
     public Map<Integer, String> listeGrilles() {
     	
     	Map<Integer, String> map = new HashMap<>();	
@@ -103,9 +124,15 @@ public class ChargerGrille {
         return map;
     }
     
+    /**
+     * Fournit une instance du modèle (MotsCroisesTP5)
+     * à partir du numéro de grille
+     * @param numChoix
+     * @return MotsCroisesTP5
+     * @throws SQLException
+     */
     public MotsCroisesTP5 extraireGrille(int numChoix) throws SQLException {
 
     	return extraireBD(maConnexion, numChoix);
-
     }
 }

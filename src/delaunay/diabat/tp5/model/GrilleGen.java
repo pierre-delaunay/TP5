@@ -1,5 +1,11 @@
 package delaunay.diabat.tp5.model;
 
+/**
+ * PRGA - TP2, classe révisée pour le TP5
+ * @author Pierre D. , Alexis D.
+ * @since 2019-03-07
+ * @version 2.0.1
+ */
 public class GrilleGen <T> {
 
 	private int lig;
@@ -38,6 +44,14 @@ public class GrilleGen <T> {
 		return (lig <= this.getLig() && col <= this.getCol() && lig >= 1 && col >= 1);
 	}
 	
+	/**
+	 * Fournit la prochaine valeur non nulle
+	 * @param int lig, indice de ligne
+	 * @param int col, indice de colonne
+	 * @param boolean horizontal, true horizontal, false vertical
+	 * @param boolean reverse, true dans le sens contraire, false sinon
+	 * @return T
+	 */
 	public T getNextValue(int lig, int col, boolean horizontal, boolean reverse) {
 		assert coordCorrectes(lig, col) : "Coordonnees incorrectes";
 		
@@ -67,6 +81,12 @@ public class GrilleGen <T> {
 		return v;
 	}
 	
+	/**
+	 * Fournit un itérateur (iterateurMots) pour la ligne ou colonne choisie
+	 * @param boolean horizontal
+	 * @param int num
+	 * @return IterateurMots
+	 */
 	public IterateurMots iterateurMots (boolean horizontal, int num) {
 		
 		 if(horizontal) { 
@@ -83,5 +103,4 @@ public class GrilleGen <T> {
 			 return new IterateurMots(tab);
 		 }
 	}
-	
 }

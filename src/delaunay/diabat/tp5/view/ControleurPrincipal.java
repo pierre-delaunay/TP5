@@ -1,19 +1,12 @@
 package delaunay.diabat.tp5.view;
 
-import java.io.IOException;
 import java.util.Map;
 
-import delaunay.diabat.tp5.MainTP5;
 import delaunay.diabat.tp5.model.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class ControleurPrincipal {
 
@@ -52,24 +45,34 @@ public class ControleurPrincipal {
         }
     }
 
+    /**
+     * Génération d'une grille aléatoire
+     */
     @FXML
     private void grilleAleatoire() {
-
+    	
 		this.nouvelleGrille(this.loader.getNumGrilleAlea());
     }
 
+    /**
+     * Nouvelle grille
+     * @param numGrille, numéro de la grille voulue par le joueur
+     */
     @FXML
     private void nouvelleGrille(int numGrille) {
 
         try {
             ctrl.setMotsCroises(this.loader.extraireGrille(numGrille));
-            ctrl.initDB();
+            ctrl.initGP();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 	}
 
+    /**
+     * Fermeture de la fenêne courante
+     * après un clique sur le MenuItem Quitter
+     */
 	@FXML
     private void exit() {
         System.exit(0);

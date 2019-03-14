@@ -5,10 +5,8 @@ import delaunay.diabat.tp5.model.GrilleGen;
 import delaunay.diabat.tp5.model.IterateurMots;
 import delaunay.diabat.tp5.model.MotsCroisesTP5;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import delaunay.diabat.tp5.*;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -32,7 +30,15 @@ public class ControleurTP5 {
     
     @FXML
     private GridPane monGridPane;
-
+    
+	public void setMotsCroises(MotsCroisesTP5 mc) {
+		this.mc = mc;
+	}
+	
+	/**
+	 * Initialisation du contrôleur
+	 * Récupération d'une grille aléatoire à partir de la base
+	 */
     @FXML
 	private void initialize() {
 
@@ -44,10 +50,13 @@ public class ControleurTP5 {
             e.printStackTrace();
         }
 
-        initDB();
+        initGP();
 	}
-
-    public void initDB() {
+    
+    /**
+     * Initialisation du GridPane
+     */
+    public void initGP() {
 
         TextField modele = (TextField) this.monGridPane.getChildren().get(0);
         this.monGridPane.getChildren().clear();
@@ -72,9 +81,12 @@ public class ControleurTP5 {
         initTF();
     }
 
+    /**
+     * Initialisation des TextField
+     */
     public void initTF() {
     	
-    	// Grille auxiliaire
+    	// Grille auxiliaire qui contiendra les pointeurs vers les textfields
     	this.grilleAux = new GrilleGen<>(this.mc.getHauteur(), this.mc.getLargeur());
     	
     	for (Node n : monGridPane.getChildren())
@@ -121,7 +133,6 @@ public class ControleurTP5 {
                 	Pattern p = Pattern.compile(regex);
                 	
                     if (newValue.matches(regex)) {
-                    	System.out.println("match");
                     	agrandirCase();
                     	this.deplacerCase(tf, false);
                     } else {
@@ -139,7 +150,7 @@ public class ControleurTP5 {
 
                 });
 
-                // Events : revele la case avec un clic molette
+                // Events : revele la case avec un clic molette/milieu
                 tf.setOnMouseClicked((e) -> {
                     this.clicCase(e);
                 });
@@ -150,24 +161,28 @@ public class ControleurTP5 {
                 });
                 
                 this.grilleAux.setValue(lig, col, tf);
-
     	   }
     	}
     }
 
+    /**
+     * Gestion des différentes frappes claviers
+     * @param KeyEvent e, touches directionnelles/Entrée/Effacer
+     */
 	private void frappeClavier(KeyEvent e) {
-		// TODO Auto-generated method stub
         KeyCode code = e.getCode();
         TextField tf = (TextField) e.getSource();
 
         switch (code) {
         	case BACK_SPACE :
                 tfCourant.setText("");
+                // reverse vaut true ici : déplacement en arrière
                 this.deplacerCase(tfCourant, true);
                 break;
                 
         	case UP :
                 this.directionCourante = Direction.VERTICAL;
+                // reverse vaut true ici : déplacement inverse au sens de lecture vertical
                 this.deplacerCase(tf, true);
                 break;
 
@@ -178,6 +193,7 @@ public class ControleurTP5 {
 
         	case LEFT :
                 this.directionCourante = Direction.HORIZONTAL;
+                // reverse vaut true ici : déplacement inverse au sens de lecture horizontal
                 this.deplacerCase(tf, true);
                 break;
 
@@ -187,7 +203,7 @@ public class ControleurTP5 {
                 break;
 
         	case ENTER :
-        		revelerSolution(tf);
+        		verifierSolution(tf);
         		break;
         		
         	default:
@@ -195,12 +211,50 @@ public class ControleurTP5 {
         }
 	}
 
-	private void revelerSolution(TextField tf) {
+	/**
+	 * Traitement de la touche Entrée
+	 * Colorie en vert les cases dans lesquelles la lettre proposée coïncide avec la solution
+	 * Colorie en rouge les propositions erronées
+	 * @param TextField tf
+	 */
+	private void verifierSolution(TextField tf) {
+		
+		int num, length;
 		
 		boolean horizontal = (this.directionCourante == Direction.HORIZONTAL);
 		
+		if (horizontal) {
+			num = ((int) tf.getProperties().get("gridpane-row")) + 1;
+			length = this.mc.getLargeur();
+		} else {
+			num = ((int) tf.getProperties().get("gridpane-column")) + 1;
+			length = this.mc.getHauteur();
+		}
+		
+		IterateurMots it = this.grilleAux.iterateurMots(horizontal, num);
+		
+		int i = 1;
+		
+        while (it.hasNext() && i <= length) {
+        	
+            TextField current = (TextField) it.next();
+            
+            if (!this.mc.estCaseNoire(horizontal ? num : i, horizontal ? i : num) &&
+                current.getText().equals(this.mc.getSolution(horizontal ? num : i, horizontal ? i : num) + "")) {
+                current.getStyleClass().add("correct");
+            } else {
+                current.getStyleClass().add("erreur");
+            }
+
+            ++i;
+        }	
 	}
 
+	/**
+	 * Déplacements entre les cases
+	 * @param tfSource, case source
+	 * @param reverse, true dans le cas d'un déplacement dans le sens inverse, false sinon
+	 */
 	private void deplacerCase(TextField tfSource, boolean reverse) {
 		
     	int lig = ((int) tfSource.getProperties().get("gridpane-row")) + 1;
@@ -216,8 +270,11 @@ public class ControleurTP5 {
 	}
 
 
+	/**
+	 * Agrandissement de la case courante suite à une frappe
+	 * La lettre frappée apparaît en s'agrandissant
+	 */
 	private void agrandirCase() {
-		// TODO Auto-generated method stub
 		 ScaleTransition transition = new ScaleTransition(Duration.seconds(1), tfCourant);
 
 		 transition.setFromX(0.2);
@@ -226,11 +283,13 @@ public class ControleurTP5 {
 		 transition.setToY(1);
 		 transition.setToX(1);
 
-		 transition.setAutoReverse(true);
 		 transition.play();
-
 	}
 
+	/**
+	 * Traitement de la frappe sur la molette
+	 * @param MouseEvent e
+	 */
 	@FXML
 	public void clicCase(MouseEvent e) {
 
@@ -244,13 +303,7 @@ public class ControleurTP5 {
             tf.getStyleClass().remove("erreur");
             tf.getStyleClass().remove("correct");
             this.mc.reveler(lig, col);
-
     	}
-	}
-
-	public void setMotsCroises(MotsCroisesTP5 mc) {
-		// TODO Auto-generated method stub
-		this.mc = mc;
 	}
 
 }

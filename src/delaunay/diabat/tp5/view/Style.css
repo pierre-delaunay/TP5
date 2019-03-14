@@ -1,16 +1,22 @@
+/* Feuille de style - TP5 */
+
+/* BorderPane du contrôleur Principal */
 #monBorderPane {
 	-fx-background-color: black;
 }
 
+/* Case courante */
 .courant {
     -fx-border-color: blue;
     -fx-border-width: 5px;
 }
 
+/* Case correcte (la proposition coïncide avec la solution)  */
 .correct {
 	-fx-background-color: green;
 }
 
+/* Case incorrecte */
 .erreur {
     -fx-background-color: red;
 }
