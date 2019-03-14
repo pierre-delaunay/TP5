@@ -24,7 +24,7 @@ public class IterateurMots implements Iterator<Object> {
 		while (this.curseur < this.tab.length && this.tab[this.curseur] == null) {
 			this.curseur++;
 		}
-    }
+	}
     
 	@Override
 	public void remove() {

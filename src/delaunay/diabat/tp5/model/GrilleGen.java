@@ -1,7 +1,7 @@
 package delaunay.diabat.tp5.model;
 
 /**
- * PRGA - TP2, classe révisée pour le TP5
+ * PRGA - TP2, classe modifiée pour le TP5
  * @author Pierre D. , Alexis D.
  * @since 2019-03-07
  * @version 2.0.1
@@ -31,13 +31,13 @@ public class GrilleGen <T> {
 	}
 	
     public T getValue(int lig, int col) {
-        assert coordCorrectes(lig, col) : "Coordonnees incorrectes";
+    	assert coordCorrectes(lig, col) : "Coordonnees incorrectes";
         return this.tab[lig-1][col-1];
     }
     
     public void setValue(int lig, int col, T value) {
     	assert coordCorrectes(lig, col) : "Coordonnees incorrectes";
-        this.tab[lig-1][col-1] = value;   	
+    	this.tab[lig-1][col-1] = value;   	
     }
     
 	public boolean coordCorrectes(int lig, int col) {
@@ -66,18 +66,16 @@ public class GrilleGen <T> {
 				}
 				v = this.getValue(lig, col);
 			}
-			
 		} else {
-            while (lig <= this.getLig() && v == null) {
-                if (reverse) {
-                	--lig;
-                } else {
-                	++lig;
-                }
-                v = this.getValue(lig, col);
-            }			
+			while (lig <= this.getLig() && v == null) {
+				if (reverse) {
+					--lig;
+				} else {
+					++lig;
+				}
+				v = this.getValue(lig, col);
+			}			
 		}
-		
 		return v;
 	}
 	
