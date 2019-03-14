@@ -241,7 +241,7 @@ public class ControleurTP5 {
             
             if (!this.mc.estCaseNoire(horizontal ? num : i, horizontal ? i : num) &&
                 current.getText().equals(this.mc.getSolution(horizontal ? num : i, horizontal ? i : num) + "")) {
-                current.getStyleClass().add("correct");
+            	current.getStyleClass().add("correct");
             } else {
                 current.getStyleClass().add("erreur");
             }

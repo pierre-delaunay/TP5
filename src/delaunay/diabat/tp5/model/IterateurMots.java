@@ -20,10 +20,10 @@ public class IterateurMots implements Iterator<Object> {
 		this.setCurseur();
 	}
 	
-    private void setCurseur() {
-        while (this.curseur < this.tab.length && this.tab[this.curseur] == null) {
-            this.curseur++;
-        }
+	private void setCurseur() {
+		while (this.curseur < this.tab.length && this.tab[this.curseur] == null) {
+			this.curseur++;
+		}
     }
     
 	@Override
