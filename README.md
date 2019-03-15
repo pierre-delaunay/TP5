@@ -29,6 +29,6 @@ Créer une base de données avec le script SQL fourni
 Modifier les informations de connexion à la base dans la classe ChargerGrille (variable url)
 ```
 
-## Preview
+<!-- ## Preview -->
 
-![alt](https://i.imgur.com/NUjROmm.gif)
+<!-- ![alt](https://i.imgur.com/NUjROmm.gif) -->
