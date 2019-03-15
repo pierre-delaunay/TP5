@@ -1,22 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.5
--- http://www.phpmyadmin.net
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
 --
--- Serveur: localhost
--- Généré le : Mer 06 Mars 2019 à 13:02
--- Version du serveur: 5.1.49
--- Version de PHP: 5.3.3
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  ven. 08 mars 2019 à 18:29
+-- Version du serveur :  5.7.23
+-- Version de PHP :  7.2.10
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données: `base_delaunay`
+-- Base de données :  `base_bousse`
 --
 
 -- --------------------------------------------------------
@@ -25,6 +28,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Structure de la table `tp5_grille`
 --
 
+DROP TABLE IF EXISTS `tp5_grille`;
 CREATE TABLE IF NOT EXISTS `tp5_grille` (
   `num_grille` int(11) NOT NULL,
   `nom_grille` varchar(100) COLLATE latin1_general_cs NOT NULL,
@@ -34,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `tp5_grille` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
 --
--- Contenu de la table `tp5_grille`
+-- Déchargement des données de la table `tp5_grille`
 --
 
 INSERT INTO `tp5_grille` (`num_grille`, `nom_grille`, `largeur`, `hauteur`) VALUES
@@ -56,6 +60,7 @@ INSERT INTO `tp5_grille` (`num_grille`, `nom_grille`, `largeur`, `hauteur`) VALU
 -- Structure de la table `tp5_mot`
 --
 
+DROP TABLE IF EXISTS `tp5_mot`;
 CREATE TABLE IF NOT EXISTS `tp5_mot` (
   `num_mot` int(11) NOT NULL AUTO_INCREMENT,
   `definition` varchar(256) COLLATE latin1_general_cs NOT NULL,
@@ -66,10 +71,10 @@ CREATE TABLE IF NOT EXISTS `tp5_mot` (
   `num_grille` int(11) NOT NULL,
   PRIMARY KEY (`num_mot`),
   KEY `FK1_MOT` (`num_grille`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs AUTO_INCREMENT=459 ;
+) ENGINE=MyISAM AUTO_INCREMENT=459 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
 --
--- Contenu de la table `tp5_mot`
+-- Déchargement des données de la table `tp5_mot`
 --
 
 INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`, `solution`, `num_grille`) VALUES
@@ -86,7 +91,7 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (11, 'Quench', 1, 7, 6, 'sate', 1),
 (12, 'Big brass instrument', 1, 9, 1, 'tuba', 1),
 (13, 'Large lot size', 1, 9, 6, 'acre', 1),
-(14, 'Neptune''s realm', 0, 1, 3, 'sea', 1),
+(14, 'Neptune\'s realm', 0, 1, 3, 'sea', 1),
 (15, 'Better than a bogey', 0, 1, 7, 'par', 1),
 (16, 'Make less bright', 0, 1, 9, 'dim', 1),
 (17, 'Fashionably dated', 0, 3, 2, 'retro', 1),
@@ -99,7 +104,7 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (24, 'Female sheep', 0, 7, 9, 'ewe', 1),
 (25, 'Wee drink', 1, 1, 4, 'sip', 2),
 (26, 'Spill the beans', 1, 2, 1, 'tell', 2),
-(27, '"My bad!"', 1, 2, 6, 'oops', 2),
+(27, '\"My bad!\"', 1, 2, 6, 'oops', 2),
 (28, 'Everything', 1, 3, 4, 'all', 2),
 (29, 'Bleak', 1, 4, 1, 'grim', 2),
 (30, 'Floor or table light', 1, 4, 6, 'lamp', 2),
@@ -161,14 +166,14 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (86, 'color your hair', 0, 1, 9, 'dye', 4),
 (87, 'Sir ___ Newton', 0, 3, 2, 'isaac', 4),
 (88, 'H2O', 0, 3, 8, 'water', 4),
-(89, 'Neptune''s realm', 0, 4, 4, 'sea', 4),
+(89, 'Neptune\'s realm', 0, 4, 4, 'sea', 4),
 (90, 'Affirmative', 0, 4, 6, 'yes', 4),
 (91, 'Cold cuts place', 0, 6, 5, 'deli', 4),
-(92, '"__-la-la"', 0, 7, 1, 'ooh', 4),
+(92, '\"__-la-la\"', 0, 7, 1, 'ooh', 4),
 (93, 'Highland headgear', 0, 7, 3, 'tam', 4),
 (94, 'Beginning of alphabet', 0, 7, 7, 'abc', 4),
 (95, 'Chicago player', 0, 7, 9, 'cub', 4),
-(96, 'Abbott, Lou''s partner', 0, 1, 1, 'bud', 4),
+(96, 'Abbott, Lou\'s partner', 0, 1, 1, 'bud', 4),
 (97, 'Octet number', 1, 1, 1, 'eight', 5),
 (98, 'Cloth fragment', 1, 1, 7, 'rag', 5),
 (99, 'Time gone by', 1, 2, 5, 'ago', 5),
@@ -185,7 +190,7 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (110, 'Part of TGIF', 0, 1, 3, 'god', 5),
 (111, 'Small pie', 0, 1, 5, 'tart', 5),
 (112, 'Wild West show', 0, 1, 7, 'rodeo', 5),
-(113, 'Comedian''s booking', 0, 1, 9, 'gig', 5),
+(113, 'Comedian\'s booking', 0, 1, 9, 'gig', 5),
 (114, 'Exterior', 0, 5, 3, 'outer', 5),
 (115, 'Frighten off', 0, 5, 9, 'deter', 5),
 (116, 'Winter footware', 0, 6, 5, 'boot', 5),
@@ -217,7 +222,7 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (142, '___ Grande', 1, 8, 13, 'rio', 6),
 (143, 'Pencil puzzle', 1, 9, 1, 'maze', 6),
 (144, 'Sicilian spa', 1, 9, 7, 'enna', 6),
-(145, '"To __ __ not to..."', 1, 9, 12, 'beor', 6),
+(145, '\"To __ __ not to...\"', 1, 9, 12, 'beor', 6),
 (146, 'Spanish 101 word', 1, 10, 1, 'eres', 6),
 (147, 'Fall mo.', 1, 10, 6, 'oct', 6),
 (148, 'Not me; thee', 1, 10, 10, 'you', 6),
@@ -253,7 +258,7 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (178, 'Browser bookmark', 0, 4, 10, 'url', 6),
 (179, 'Groove', 0, 5, 4, 'rut', 6),
 (180, 'Bit of butter', 0, 5, 12, 'dab', 6),
-(181, 'Psychic''s claim', 0, 6, 6, 'esp', 6),
+(181, 'Psychic\'s claim', 0, 6, 6, 'esp', 6),
 (182, 'Factory', 0, 6, 8, 'plant', 6),
 (183, 'Related (to)', 0, 6, 9, 'akin', 6),
 (184, 'Old Italian money', 0, 6, 13, 'lire', 6),
@@ -300,7 +305,7 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (225, 'Burdensome', 1, 8, 1, 'onerous', 7),
 (226, 'Matured', 1, 8, 9, 'ripened', 7),
 (227, 'Stroke a guitar', 1, 9, 1, 'strum', 7),
-(228, 'Tibet''s continent', 1, 9, 7, 'asia', 7),
+(228, 'Tibet\'s continent', 1, 9, 7, 'asia', 7),
 (229, 'Printing measures', 1, 9, 13, 'ens', 7),
 (230, 'Wimbledon game', 1, 10, 1, 'tennis', 7),
 (231, 'Hermit', 1, 10, 8, 'loner', 7),
@@ -312,13 +317,13 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (237, 'Aroma', 1, 13, 7, 'odor', 7),
 (238, 'Water whirl', 1, 13, 12, 'eddy', 7),
 (239, 'Delight', 1, 14, 1, 'elate', 7),
-(240, 'Trucker''s vehicle', 1, 14, 7, 'semi', 7),
+(240, 'Trucker\'s vehicle', 1, 14, 7, 'semi', 7),
 (241, 'Cry', 1, 14, 12, 'weep', 7),
 (242, 'Evil spirit', 1, 15, 1, 'demon', 7),
 (243, 'Family chart', 1, 15, 7, 'tree', 7),
 (244, 'Classify', 1, 15, 12, 'sort', 7),
 (245, '__ and quiet', 0, 1, 1, 'peace', 7),
-(246, 'Vulture''s claw', 0, 1, 2, 'talon', 7),
+(246, 'Vulture\'s claw', 0, 1, 2, 'talon', 7),
 (247, 'Ward off', 0, 1, 3, 'avert', 7),
 (248, 'Confidential', 0, 1, 4, 'secret', 7),
 (249, 'Part of DJ', 0, 1, 6, 'disc', 7),
@@ -349,15 +354,15 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (274, 'Cul-de____', 0, 10, 6, 'sac', 7),
 (275, 'Misjudge', 0, 10, 11, 'err', 7),
 (276, 'Extends (a subscription), ', 0, 10, 12, 'renews', 7),
-(277, 'Hen''s perch', 0, 11, 7, 'roost', 7),
+(277, 'Hen\'s perch', 0, 11, 7, 'roost', 7),
 (278, 'MTV feature', 0, 11, 13, 'video', 7),
 (279, 'Below', 0, 11, 14, 'under', 7),
-(280, 'Cairo''s land', 0, 11, 15, 'egypt', 7),
-(281, 'Plaint''s beginning', 0, 12, 1, 'seed', 7),
+(280, 'Cairo\'s land', 0, 11, 15, 'egypt', 7),
+(281, 'Plaint\'s beginning', 0, 12, 1, 'seed', 7),
 (282, 'Skilled', 0, 12, 2, 'able', 7),
 (283, 'Ramble', 0, 12, 3, 'roam', 7),
 (284, 'Show up', 0, 12, 9, 'come', 7),
-(285, 'Albany''s canal', 0, 12, 10, 'erie', 7),
+(285, 'Albany\'s canal', 0, 12, 10, 'erie', 7),
 (286, 'Desire', 0, 13, 5, 'yen', 7),
 (287, 'Come in', 1, 5, 1, 'enter', 7),
 (288, 'Put into effect', 1, 5, 8, 'enact', 7),
@@ -367,12 +372,12 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (292, 'Cuckoo', 1, 2, 1, 'loco', 8),
 (293, 'Mild oath', 1, 2, 6, 'drat', 8),
 (294, 'Characteristic', 1, 2, 11, 'trait', 8),
-(295, 'Isn''t, incorrectly', 1, 3, 1, 'aint', 8),
+(295, 'Isn\'t, incorrectly', 1, 3, 1, 'aint', 8),
 (296, 'Better half', 1, 3, 6, 'mate', 8),
 (297, 'Major artery', 1, 3, 11, 'aorta', 8),
 (298, 'Entreaty', 1, 4, 1, 'plea', 8),
 (299, 'Thinker ___ Newton', 1, 4, 6, 'isaac', 8),
-(300, 'Shopper''s paradise', 1, 4, 12, 'mall', 8),
+(300, 'Shopper\'s paradise', 1, 4, 12, 'mall', 8),
 (301, 'Fish trap', 1, 5, 4, 'net', 8),
 (302, 'Aquatic mammal', 1, 5, 9, 'manatee', 8),
 (303, 'Diva ___ Callas', 1, 6, 1, 'maria', 8),
@@ -405,7 +410,7 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (330, 'Pimples', 0, 1, 3, 'acne', 8),
 (331, 'Pertainig to plants', 0, 1, 4, 'botanical', 8),
 (332, 'Confess', 0, 1, 6, 'admit', 8),
-(333, 'Retirees'' accts', 0, 1, 7, 'iras', 8),
+(333, 'Retirees\' accts', 0, 1, 7, 'iras', 8),
 (334, 'Information', 0, 1, 8, 'data', 8),
 (335, 'Emits vapor', 0, 1, 9, 'steams', 8),
 (336, 'School group (abbr.),', 0, 1, 11, 'pta', 8),
@@ -419,12 +424,12 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (344, 'Army chow', 0, 6, 1, 'mess', 8),
 (345, 'Great deal (2 wds.),', 0, 6, 2, 'alot', 8),
 (346, 'Decorate anew', 0, 6, 3, 'redo', 8),
-(347, 'Pop''s partner', 0, 6, 7, 'mom', 8),
+(347, 'Pop\'s partner', 0, 6, 7, 'mom', 8),
 (348, 'Not appropriate', 0, 6, 8, 'inapt', 8),
 (349, 'President ___ Reagan', 0, 7, 6, 'ronald', 8),
 (350, 'Hesitating', 0, 7, 12, 'faltering', 8),
 (351, 'With completence', 0, 7, 13, 'ably', 8),
-(352, 'Rod''s partner', 0, 7, 14, 'reel', 8),
+(352, 'Rod\'s partner', 0, 7, 14, 'reel', 8),
 (353, 'Jobless', 0, 7, 15, 'idle', 8),
 (354, 'Horse food', 0, 8, 9, 'hay', 8),
 (355, 'And so forth (abbr.),', 0, 9, 5, 'etc', 8),
@@ -434,7 +439,7 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (359, 'Cowboy show', 0, 11, 2, 'rodeo', 8),
 (360, 'Tease', 0, 11, 3, 'taunt', 8),
 (361, 'Small bay', 0, 11, 4, 'inlet', 8),
-(362, 'Spanish "mister"', 0, 11, 10, 'senor', 8),
+(362, 'Spanish \"mister\"', 0, 11, 10, 'senor', 8),
 (363, 'Alaskan city', 0, 12, 8, 'nome', 8),
 (364, 'Showed up', 0, 12, 9, 'came', 8),
 (365, 'Inspiration', 0, 12, 13, 'idea', 8),
@@ -443,31 +448,31 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (368, 'Couple', 0, 13, 5, 'two', 8),
 (369, 'Order', 1, 1, 1, 'fiat', 9),
 (370, '___ palm', 1, 1, 7, 'acai', 9),
-(371, 'It''s made with syrup', 1, 1, 12, 'cola', 9),
-(372, 'Town near Ireland''s Shannon Airport', 1, 2, 1, 'ennis', 9),
+(371, 'It\'s made with syrup', 1, 1, 12, 'cola', 9),
+(372, 'Town near Ireland\'s Shannon Airport', 1, 2, 1, 'ennis', 9),
 (373, 'A caller may be on this', 1, 2, 7, 'hold', 9),
 (374, 'Track type', 1, 2, 12, 'oval', 9),
 (375, '& (3,6) Italian-born composer', 1, 3, 1, 'monteverdi', 9),
 (376, 'Something a scow lacks', 1, 3, 12, 'keel', 9),
-(377, 'It''s often hooked', 1, 4, 1, 'bra', 9),
+(377, 'It\'s often hooked', 1, 4, 1, 'bra', 9),
 (378, 'Carlos the Jackal, for one', 1, 4, 5, 'nomdeguerre', 9),
 (379, 'Start of a Beatles refrain', 1, 5, 1, 'obladi', 9),
 (380, 'Eastern titles', 1, 5, 8, 'sris', 9),
 (381, '___ loss', 1, 5, 13, 'ata', 9),
 (382, 'Bars in cars', 1, 6, 1, 'tierods', 9),
-(383, '"A ___ champion never handled sword": "Henry VI, Part I"', 1, 6, 9, 'stouter', 9),
-(384, '"Understood"', 1, 7, 2, 'tenfour', 9),
-(385, 'Danny''s love in "Ocean''s Eleven"', 1, 7, 12, 'tess', 9),
+(383, '\"A ___ champion never handled sword\": \"Henry VI, Part I\"', 1, 6, 9, 'stouter', 9),
+(384, '\"Understood\"', 1, 7, 2, 'tenfour', 9),
+(385, 'Danny\'s love in \"Ocean\'s Eleven\"', 1, 7, 12, 'tess', 9),
 (386, '& (8,9) German-born composer', 1, 8, 4, 'offenbach', 9),
-(387, 'Man''s name that spells a fruit backward', 1, 9, 1, 'emil', 9),
+(387, 'Man\'s name that spells a fruit backward', 1, 9, 1, 'emil', 9),
 (388, 'Class lists?', 1, 9, 8, 'syllabi', 9),
-(389, 'Takes one''s sweet time', 1, 10, 1, 'dawdles', 9),
+(389, 'Takes one\'s sweet time', 1, 10, 1, 'dawdles', 9),
 (390, 'Kind of car or class', 1, 10, 9, 'economy', 9),
 (391, '2014 Oscar winner for Best Foreign Language Film', 1, 11, 1, 'ida', 9),
-(392, 'Space cadet''s need?', 1, 11, 5, 'clue', 9),
+(392, 'Space cadet\'s need?', 1, 11, 5, 'clue', 9),
 (393, 'Prompt', 1, 11, 10, 'ontime', 9),
-(394, 'His first tweet ended "I bless all of you from my heart"', 1, 12, 1, 'benedictxvi', 9),
-(395, 'What the lowing herd wind slowly o''er, in verse', 1, 12, 13, 'lea', 9),
+(394, 'His first tweet ended \"I bless all of you from my heart\"', 1, 12, 1, 'benedictxvi', 9),
+(395, 'What the lowing herd wind slowly o\'er, in verse', 1, 12, 13, 'lea', 9),
 (396, 'For the calorie-conscious', 1, 13, 1, 'lite', 9),
 (397, '& (13,12) Austrian-born composer', 1, 13, 6, 'schoenberg', 9),
 (398, 'N.B.A. coach Spoelstra', 1, 14, 1, 'erik', 9),
@@ -476,42 +481,42 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (401, 'Without', 1, 15, 1, 'sans', 9),
 (402, 'Ligurian Sea feeder', 1, 15, 6, 'arno', 9),
 (403, 'North Sea feeder', 1, 15, 12, 'yser', 9),
-(404, '"Austin Powers" villain', 0, 1, 1, 'fembot', 9),
+(404, '\"Austin Powers\" villain', 0, 1, 1, 'fembot', 9),
 (405, 'Out of this world?', 0, 1, 2, 'inorbit', 9),
-(406, 'Longtime grandmotherly "General Hospital" actress', 0, 1, 3, 'annalee', 9),
+(406, 'Longtime grandmotherly \"General Hospital\" actress', 0, 1, 3, 'annalee', 9),
 (407, 'Short-beaked bird', 0, 1, 4, 'tit', 9),
-(408, '"Aren''t you forgetting something?"', 0, 1, 7, 'ahem', 9),
+(408, '\"Aren\'t you forgetting something?\"', 0, 1, 7, 'ahem', 9),
 (409, 'Jumble behind a computer desk', 0, 1, 8, 'cords', 9),
 (410, 'Hazel relatives', 0, 1, 9, 'alders', 9),
-(411, '"Cool, man!"', 0, 1, 10, 'idigit', 9),
+(411, '\"Cool, man!\"', 0, 1, 10, 'idigit', 9),
 (412, 'Popular (1,12)-Across', 0, 1, 12, 'coke', 9),
 (413, 'Gorged', 0, 1, 13, 'overate', 9),
-(414, 'Shakespeare character who says "I dare damnation"', 0, 1, 14, 'laertes', 9),
+(414, 'Shakespeare character who says \"I dare damnation\"', 0, 1, 14, 'laertes', 9),
 (415, 'Paying close attention', 0, 1, 15, 'allears', 9),
 (416, 'Retirement party, e.g.', 0, 2, 5, 'sendoff', 9),
 (417, 'Without', 0, 3, 6, 'voidof', 9),
 (418, 'Tour grp.', 0, 4, 11, 'uso', 9),
-(419, '"Happy Days" malt shop owner', 0, 5, 4, 'arnold', 9),
+(419, '\"Happy Days\" malt shop owner', 0, 5, 4, 'arnold', 9),
 (420, 'File certain papers', 0, 6, 7, 'sue', 9),
-(421, '"View From the U.N." memoirist', 0, 6, 12, 'uthant', 9),
+(421, '\"View From the U.N.\" memoirist', 0, 6, 12, 'uthant', 9),
 (422, 'Hosp. staffers', 0, 7, 8, 'rns', 9),
-(423, 'Cry that''s often doubled', 0, 8, 9, 'bye', 9),
+(423, 'Cry that\'s often doubled', 0, 8, 9, 'bye', 9),
 (424, 'Place for a bust', 0, 8, 10, 'alcove', 9),
 (425, 'Doubling up?', 0, 8, 11, 'cloning', 9),
 (426, 'Food', 0, 9, 1, 'edibles', 9),
 (427, 'Port alternative', 0, 9, 2, 'madeira', 9),
-(428, '"Sign me up!"', 0, 9, 3, 'iwantin', 9),
+(428, '\"Sign me up!\"', 0, 9, 3, 'iwantin', 9),
 (429, 'Heating equipment', 0, 9, 13, 'boilers', 9),
 (430, 'Put completely (in)', 0, 9, 14, 'immerse', 9),
 (431, 'TV option, for short', 0, 10, 5, 'lcd', 9),
 (432, 'Engineer Gray who co-founded Western Electric', 0, 10, 6, 'elisha', 9),
 (433, 'Aid', 0, 10, 7, 'succor', 9),
-(434, 'Shepard''s role in "The Right Stuff"', 0, 10, 15, 'yeager', 9),
+(434, 'Shepard\'s role in \"The Right Stuff\"', 0, 10, 15, 'yeager', 9),
 (435, '___ Allen Express (Amtrak train in the Northeast)', 0, 11, 8, 'ethan', 9),
 (436, 'Horror movie sounds', 0, 12, 4, 'eeks', 9),
 (437, 'Letter ender', 0, 12, 9, 'xoxo', 9),
-(438, '"Whew!"', 0, 13, 12, 'boy', 9),
-(439, 'Tireur à l''arc', 1, 1, 1, 'archer', 10),
+(438, '\"Whew!\"', 0, 13, 12, 'boy', 9),
+(439, 'Tireur à l\'arc', 1, 1, 1, 'archer', 10),
 (440, 'Administration', 1, 2, 1, 'douane', 10),
 (441, 'Mois', 1, 3, 1, 'juin', 10),
 (442, 'Détiennent', 1, 4, 1, 'ont', 10),
@@ -524,10 +529,15 @@ INSERT INTO `tp5_mot` (`num_mot`, `definition`, `horizontal`, `ligne`, `colonne`
 (449, 'Reprise en boxe', 0, 1, 2, 'round', 10),
 (450, 'Chauffé', 0, 1, 3, 'cuit', 10),
 (451, 'La France au fronton', 0, 6, 3, 'rf', 10),
-(452, 'A gauche d''Hannibal', 0, 1, 4, 'han', 10),
+(452, 'A gauche d\'Hannibal', 0, 1, 4, 'han', 10),
 (453, 'Cours court', 0, 5, 4, 'geo', 10),
 (454, 'Préposition', 0, 1, 5, 'en', 10),
 (455, 'Boissons', 0, 4, 5, 'vins', 10),
 (456, 'Bien rond, joufflu', 0, 1, 6, 'rebondi', 10),
 (457, 'Voyelle', 1, 1, 1, 'I', 11),
 (458, 'Consonne', 0, 1, 1, 'I', 11);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

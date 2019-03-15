@@ -37,7 +37,7 @@ public class ChargerGrille {
         // String url = "jdbc:mysql://anteros.istic.univ-rennes1.fr/base_bousse";
     	
     	// Setup local
-        String url = "jdbc:mysql://localhost/base_delaunay";
+        String url = "jdbc:mysql://localhost/base_bousse";
   
         try {
         	Class.forName ("com.mysql.jdbc.Driver");
